@@ -1,4 +1,4 @@
-RSpec.describe Foobara::Generators::OrganizationGenerator::GenerateOrganization do
+RSpec.describe Foobara::Generators::DomainMapperGenerator::GenerateDomainMapper do
   let(:name) { "SomePrefix::SomeOrg" }
 
   let(:inputs) do
@@ -11,11 +11,11 @@ RSpec.describe Foobara::Generators::OrganizationGenerator::GenerateOrganization 
   let(:outcome) { command.run }
   let(:result) { outcome.result }
 
-  it "generates a organization" do
+  it "generates a domain mapper" do
     expect(outcome).to be_success
 
-    organization_file = result["src/some_prefix/some_org.rb"]
-    expect(organization_file).to include("module SomeOrg")
-    expect(organization_file).to include("module SomePrefix")
+    domain_mapper_file = result["src/some_prefix/some_org.rb"]
+    expect(domain_mapper_file).to include("module SomeOrg")
+    expect(domain_mapper_file).to include("module SomePrefix")
   end
 end

@@ -2,8 +2,8 @@ require "English"
 
 module Foobara
   module Generators
-    module OrganizationGenerator
-      class OrganizationConfig < Foobara::Model
+    module DomainMapperGenerator
+      class DomainMapperConfig < Foobara::Model
         attributes do
           name :string, :required
           description :string, :allow_nil

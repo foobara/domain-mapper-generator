@@ -1,22 +1,22 @@
-RSpec.describe Foobara::Generators::OrganizationGenerator::WriteOrganizationToDisk do
+RSpec.describe Foobara::Generators::DomainMapperGenerator::WriteDomainMapperToDisk do
   let(:command) { described_class.new(inputs) }
   let(:outcome) { command.run }
   let(:result) { outcome.result }
   let(:errors) { outcome.errors }
   let(:inputs) do
     {
-      organization_config:,
+      domain_mapper_config:,
       output_directory:
     }
   end
-  let(:organization_config) do
+  let(:domain_mapper_config) do
     {
       name:,
       description: "whatever"
     }
   end
   let(:name) { "SomeOrg" }
-  let(:output_directory) { "#{__dir__}/../../../tmp/organization_test_suite_output" }
+  let(:output_directory) { "#{__dir__}/../../../tmp/domain_mapper_test_suite_output" }
 
   before do
     # rubocop:disable RSpec/AnyInstance
@@ -38,7 +38,7 @@ RSpec.describe Foobara::Generators::OrganizationGenerator::WriteOrganizationToDi
     context "with no output directory" do
       let(:inputs) do
         {
-          organization_config:
+          domain_mapper_config:
         }
       end
 

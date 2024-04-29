@@ -1,19 +1,19 @@
-require_relative "generate_organization"
+require_relative "generate_domain_mapper"
 
 module Foobara
   module Generators
-    module OrganizationGenerator
-      class WriteOrganizationToDisk < Foobara::Generators::WriteGeneratedFilesToDisk
+    module DomainMapperGenerator
+      class WriteDomainMapperToDisk < Foobara::Generators::WriteGeneratedFilesToDisk
         class << self
           def generator_key
-            "organization"
+            "domain-mapper"
           end
         end
 
-        depends_on GenerateOrganization
+        depends_on GenerateDomainMapper
 
         inputs do
-          organization_config OrganizationConfig, :required
+          domain_mapper_config DomainMapperConfig, :required
           # TODO: should be able to delete this and inherit it
           output_directory :string
         end
@@ -35,8 +35,8 @@ module Foobara
         end
 
         def generate_file_contents
-          # TODO: just pass this in as the inputs instead of the organization??
-          self.paths_to_source_code = run_subcommand!(GenerateOrganization, organization_config.attributes)
+          # TODO: just pass this in as the inputs instead of the domain mapper??
+          self.paths_to_source_code = run_subcommand!(GenerateDomainMapper, domain_mapper_config.attributes)
         end
 
         def run_post_generation_tasks

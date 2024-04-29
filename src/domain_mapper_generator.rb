@@ -1,14 +1,14 @@
 module Foobara
   module Generators
-    module OrganizationGenerator
+    module DomainMapperGenerator
       module Generators
-        class OrganizationGenerator < Foobara::FilesGenerator
+        class DomainMapperGenerator < Foobara::FilesGenerator
           class << self
             def manifest_to_generator_classes(manifest)
               case manifest
-              when OrganizationConfig
+              when DomainMapperConfig
                 [
-                  Generators::OrganizationGenerator
+                  Generators::DomainMapperGenerator
                 ]
               else
                 # :nocov:
@@ -19,7 +19,7 @@ module Foobara
           end
 
           def template_path
-            ["src", "organization.rb.erb"]
+            ["src", "domain_mapper.rb.erb"]
           end
 
           def target_path
@@ -30,7 +30,7 @@ module Foobara
             ["src", *path, file]
           end
 
-          alias organization_config relevant_manifest
+          alias domain_mapper_config relevant_manifest
 
           def templates_dir
             "#{__dir__}/../templates"

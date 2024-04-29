@@ -1,9 +1,15 @@
-<% module_path.each do |part| %>
+<% module_path[..-2].each do |part| %>
 module <%= part %>
 <% end %>
+  class <%= module_path.last %> < Foobara::DomainMapper
+    from :integer
+    to :string
 
-  foobara_domain_mapper!
+    def map(from_value)
+      from_value.to_s
+    end
+  end
 
-<% module_path.size.times do %>
+<% (module_path.size - 1).times do %>
 end
 <% end %>

@@ -15,7 +15,7 @@ RSpec.describe Foobara::Generators::DomainMapperGenerator::WriteDomainMapperToDi
       description: "whatever"
     }
   end
-  let(:name) { "SomeOrg" }
+  let(:name) { "SomePrefix::SomeOrg::DomainMappers::SomeOtherDomain::SomeMapper" }
   let(:output_directory) { "#{__dir__}/../../../tmp/domain_mapper_test_suite_output" }
 
   before do
@@ -27,10 +27,12 @@ RSpec.describe Foobara::Generators::DomainMapperGenerator::WriteDomainMapperToDi
   end
 
   describe "#run" do
-    it "contains base files" do
+    it "contains generated domain mapper" do
       expect(outcome).to be_success
 
-      expect(command.paths_to_source_code.keys).to include("src/some_org.rb")
+      expect(command.paths_to_source_code.keys).to include(
+        "src/some_prefix/some_org/domain_mappers/some_other_domain/some_mapper.rb"
+      )
     end
   end
 

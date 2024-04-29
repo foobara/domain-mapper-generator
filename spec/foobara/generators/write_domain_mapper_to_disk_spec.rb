@@ -23,6 +23,20 @@ RSpec.describe Foobara::Generators::DomainMapperGenerator::WriteDomainMapperToDi
     allow_any_instance_of(described_class).to receive(:git_commit).and_return(nil)
     allow_any_instance_of(described_class).to receive(:rubocop_autocorrect).and_return(nil)
     # rubocop:enable RSpec/AnyInstance
+  end
+
+  around do |example|
+    FileUtils.mkdir_p output_directory
+
+    FileUtils.cp "#{__dir__}/../../fixtures/fake_project/.ruby-version", output_directory
+    FileUtils.cp "#{__dir__}/../../fixtures/fake_project/Gemfile", output_directory
+
+    Dir.chdir output_directory do
+      example.run
+    end
+  end
+
+  after do
     FileUtils.rm_rf output_directory
   end
 

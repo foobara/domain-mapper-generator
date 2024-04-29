@@ -36,23 +36,28 @@ module Foobara
 
         def generate_file_contents
           # TODO: just pass this in as the inputs instead of the domain mapper??
+          # TODO: move chdir up to FilesGenerator project
           self.paths_to_source_code = run_subcommand!(GenerateDomainMapper, domain_mapper_config.attributes)
         end
 
         def run_post_generation_tasks
           Dir.chdir output_directory do
+            bundle_install
             rubocop_autocorrect
+          end
+        end
+
+        def bundle_install
+          puts "bundling..."
+
+          Bundler.with_unbundled_env do
+            run_cmd_and_return_output("bundle install")
           end
         end
 
         def rubocop_autocorrect
           # :nocov:
-          Open3.popen3("bundle exec rubocop --no-server -A") do |_stdin, _stdout, stderr, wait_thr|
-            exit_status = wait_thr.value
-            unless exit_status.success?
-              raise "could not rubocop -A. #{stderr.read}"
-            end
-          end
+          run_cmd_and_return_output("bundle exec rubocop --no-server -A")
           # :nocov:
         end
       end

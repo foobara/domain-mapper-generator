@@ -8,7 +8,8 @@ module Foobara
               case manifest
               when DomainMapperConfig
                 [
-                  Generators::DomainMapperGenerator
+                  Generators::DomainMapperGenerator,
+                  Generators::GemfileGenerator
                 ]
               else
                 # :nocov:

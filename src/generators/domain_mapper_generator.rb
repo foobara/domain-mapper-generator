@@ -33,7 +33,7 @@ module Foobara
           alias domain_mapper_config relevant_manifest
 
           def templates_dir
-            "#{__dir__}/../templates"
+            "#{__dir__}/../../templates"
           end
         end
       end
